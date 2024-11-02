@@ -20,6 +20,9 @@ struct ListItems {
     Row(){
       Column(){
         Button('国际新闻')
+          .onClick(()=>{
+
+          })
           .fontSize(24)
           .margin({top:30,bottom:30})
         Button('体育新闻')
