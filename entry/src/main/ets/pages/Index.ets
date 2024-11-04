@@ -1,11 +1,12 @@
-import { IntePage } from './InteNews';
-import { SportPage } from './SportNews';
-import { FirstPage } from './FirstPage';
-import { GamePage } from './GameNews';
+
+import './NewsPage'
+import { News } from './NewsPage';
+import  './SettingsPage'
+import { Settings } from './SettingsPage';
 
 @Entry
 @Component
-struct BottomTabExample {
+struct BottomTab {
   private tabsController: TabsController = new TabsController();
   @State currentIndex: number = 0;
 
@@ -26,21 +27,11 @@ struct BottomTabExample {
       controller: this.tabsController
     }) {
       TabContent() {
-        FirstPage()
-        // 首页的内容
-      }.tabBar(this.TabBuilder('首页', 0))
+        News()
+      }.tabBar(this.TabBuilder('新闻', 0))
       TabContent() {
-        IntePage()
-        // 国际新闻页面的内容
-      }.tabBar(this.TabBuilder('国际', 1))
-      TabContent() {
-        SportPage()
-        // 体育新闻页面的内容
-      }.tabBar(this.TabBuilder('体育', 2))
-      TabContent(){
-        GamePage()
-        //游戏新闻页面的内容
-      }.tabBar(this.TabBuilder('游戏',3))
+        Settings()
+      }.tabBar(this.TabBuilder('设置', 1))
     }
 
     .onChange((index) => {
