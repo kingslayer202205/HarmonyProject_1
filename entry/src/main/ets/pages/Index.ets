@@ -1,14 +1,22 @@
 
-import './NewsPage'
-import { News } from './NewsPage';
-import  './SettingsPage'
-import { Settings } from './SettingsPage';
+
+import {webview} from '@kit.ArkWeb'
+import { Login } from './LoginPage';
 
 @Entry
 @Component
 struct BottomTab {
   private tabsController: TabsController = new TabsController();
   @State currentIndex: number = 0;
+  controller: webview.WebviewController = new webview.WebviewController()
+  onBackPress(){
+    if(this.controller.accessStep(-1)) {
+      this.controller.backward()
+      return true;
+    }
+
+   return false;
+  }
 
   @Builder TabBuilder(title: string, targetIndex: number) {
     Column() {
@@ -27,10 +35,10 @@ struct BottomTab {
       controller: this.tabsController
     }) {
       TabContent() {
-        News()
+        Web({ src: 'https://world.huanqiu.com/', controller: this.controller })
       }.tabBar(this.TabBuilder('新闻', 0))
       TabContent() {
-        Settings()
+        Login()
       }.tabBar(this.TabBuilder('设置', 1))
     }
 
@@ -39,3 +47,4 @@ struct BottomTab {
     })
   }
 }
+
