@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "module_desc",
-      "value": "module description"
+      "value": "description"
     },
     {
       "name": "EntryAbility_desc",
@@ -10,7 +10,175 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "NewsApp"
+      "value": "newsData"
+    },
+    {
+      "name": "pull_up_load_text",
+      "value": "Loading in..."
+    },
+    {
+      "name": "pull_down_refresh_text",
+      "value": "The drop-down refresh"
+    },
+    {
+      "name": "uploading_text",
+      "value": "Uploading... Please wait."
+    },
+    {
+      "name": "release_refresh_text",
+      "value": "Loosen the refresh"
+    },
+    {
+      "name": "refreshing_text",
+      "value": "Is refreshing"
+    },
+    {
+      "name": "refresh_success_text",
+      "value": "Refresh the success"
+    },
+    {
+      "name": "refresh_fail_text",
+      "value": "Refresh the failure"
+    },
+    {
+      "name": "release_btn",
+      "value": "Release"
+    },
+    {
+      "name": "http_error_message",
+      "value": "Network request failed, please try later!"
+    },
+    {
+      "name": "page_none_msg",
+      "value": "Network loading failure"
+    },
+    {
+      "name": "click_reload",
+      "value": "Click Reload"
+    },
+    {
+      "name": "prompt_message",
+      "value": "No more data"
+    },
+    {
+      "name": "prompt_no_title",
+      "value": "Please enter a title."
+    },
+    {
+      "name": "prompt_select_img",
+      "value": "Select an image to upload."
+    },
+    {
+      "name": "prompt_no_content",
+      "value": "Please enter the content."
+    },
+    {
+      "name": "prompt_no_file",
+      "value": "Please select a picture."
+    },
+    {
+      "name": "upload_error_message",
+      "value": "Upload file failed, please try again!"
+    },
+    {
+      "name": "title_default_text",
+      "value": "Fill in the title"
+    },
+    {
+      "name": "content_default_text",
+      "value": "Write something"
+    },
+    {
+      "name": "harmony_hei_ti",
+      "value": "HarmonyHeiTi"
+    },
+    {
+      "name": "harmony_hei_ti_medium",
+      "value": "HarmonyHeiTi-Medium"
+    },
+    {
+      "name": "tab_all",
+      "value": "All"
+    },
+    {
+      "name": "tab_domestic",
+      "value": "Domestic"
+    },
+    {
+      "name": "tab_international",
+      "value": "International"
+    },
+    {
+      "name": "tab_fun",
+      "value": "Fun"
+    },
+    {
+      "name": "tab_military",
+      "value": "Military"
+    },
+    {
+      "name": "tab_sports",
+      "value": "Sports"
+    },
+    {
+      "name": "tab_science",
+      "value": "Science"
+    },
+    {
+      "name": "apply_for_network",
+      "value": "Allow the app to access the network"
+    },
+    {
+      "name": "fruit_text",
+      "value": "Name"
+    },
+    {
+      "name": "fruit_placeholder",
+      "value": "Jack"
+    },
+    {
+      "name": "number_text",
+      "value": "Age"
+    },
+    {
+      "name": "number_placeholder",
+      "value": "25"
+    },
+    {
+      "name": "write_data_btn_text",
+      "value": "Write DB"
+    },
+    {
+      "name": "read_data_btn_text",
+      "value": "Read DB"
+    },
+    {
+      "name": "delete_data_file_btn_text",
+      "value": "Delete DB File"
+    },
+    {
+      "name": "delete_success_msg",
+      "value": "Delete database successfully!"
+    },
+    {
+      "name": "data_is_null_msg",
+      "value": "Data is empty, please write data first!"
+    },
+    {
+      "name": "read_success_msg",
+      "value": "Read data successfully!"
+    },
+    {
+      "name": "fruit_input_null_msg",
+      "value": "Fruit name or fruit num is empty, please write data first!"
+    },
+    {
+      "name": "write_success_msg",
+      "value": "Write data successfully!"
+    },
+    {
+      "name": "empty",
+      "value": "empty"
     }
   ]
 }

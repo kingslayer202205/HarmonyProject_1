@@ -2,7 +2,7 @@
   "string": [
     {
       "name": "module_desc",
-      "value": "模块描述"
+      "value": "description"
     },
     {
       "name": "EntryAbility_desc",
@@ -10,7 +10,175 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "NewsApp"
+      "value": "newsData"
+    },
+    {
+      "name": "pull_up_load_text",
+      "value": "加载中..."
+    },
+    {
+      "name": "pull_down_refresh_text",
+      "value": "下拉刷新"
+    },
+    {
+      "name": "uploading_text",
+      "value": "正在上传，请稍等"
+    },
+    {
+      "name": "release_refresh_text",
+      "value": "松开刷新"
+    },
+    {
+      "name": "refreshing_text",
+      "value": "正在刷新"
+    },
+    {
+      "name": "refresh_success_text",
+      "value": "刷新成功"
+    },
+    {
+      "name": "refresh_fail_text",
+      "value": "刷新失败"
+    },
+    {
+      "name": "release_btn",
+      "value": "发布"
+    },
+    {
+      "name": "http_error_message",
+      "value": "网络请求失败，请稍后尝试！"
+    },
+    {
+      "name": "page_none_msg",
+      "value": "网络加载失败"
+    },
+    {
+      "name": "click_reload",
+      "value": "重新加载"
+    },
+    {
+      "name": "prompt_message",
+      "value": "没有更多数据了"
+    },
+    {
+      "name": "prompt_no_title",
+      "value": "请输入标题"
+    },
+    {
+      "name": "prompt_select_img",
+      "value": "请选择图片进行上传"
+    },
+    {
+      "name": "prompt_no_content",
+      "value": "请输入内容"
+    },
+    {
+      "name": "prompt_no_file",
+      "value": "请选择图片"
+    },
+    {
+      "name": "upload_error_message",
+      "value": "上传文件失败，请重试！"
+    },
+    {
+      "name": "title_default_text",
+      "value": "填写标题"
+    },
+    {
+      "name": "content_default_text",
+      "value": "写点什么"
+    },
+    {
+      "name": "harmony_hei_ti",
+      "value": "HarmonyHeiTi"
+    },
+    {
+      "name": "harmony_hei_ti_medium",
+      "value": "HarmonyHeiTi-Medium"
+    },
+    {
+      "name": "tab_all",
+      "value": "全部"
+    },
+    {
+      "name": "tab_domestic",
+      "value": "国内"
+    },
+    {
+      "name": "tab_international",
+      "value": "国际"
+    },
+    {
+      "name": "tab_fun",
+      "value": "娱乐"
+    },
+    {
+      "name": "tab_military",
+      "value": "军事"
+    },
+    {
+      "name": "tab_sports",
+      "value": "体育"
+    },
+    {
+      "name": "tab_science",
+      "value": "科技"
+    },
+    {
+      "name": "apply_for_network",
+      "value": "允许应用使用网络"
+    },
+    {
+      "name": "fruit_text",
+      "value": "Name"
+    },
+    {
+      "name": "fruit_placeholder",
+      "value": "Jack"
+    },
+    {
+      "name": "number_text",
+      "value": "Age"
+    },
+    {
+      "name": "number_placeholder",
+      "value": "25"
+    },
+    {
+      "name": "write_data_btn_text",
+      "value": "Write DB"
+    },
+    {
+      "name": "read_data_btn_text",
+      "value": "Read DB"
+    },
+    {
+      "name": "delete_data_file_btn_text",
+      "value": "Delete DB File"
+    },
+    {
+      "name": "delete_success_msg",
+      "value": "删除数据库成功！"
+    },
+    {
+      "name": "data_is_null_msg",
+      "value": "数据为空，请先写入数据！"
+    },
+    {
+      "name": "read_success_msg",
+      "value": "读取数据成功！"
+    },
+    {
+      "name": "fruit_input_null_msg",
+      "value": "水果名称或者水果数量为空，请先输入数据！"
+    },
+    {
+      "name": "write_success_msg",
+      "value": "写入数据成功！"
+    },
+    {
+      "name": "empty",
+      "value": "empty"
     }
   ]
 }

@@ -9,11 +9,6 @@
       "tablet",
       "2in1"
     ],
-    "requestPermissions": [
-      {
-        "name": "ohos.permission.INTERNET"
-      }
-    ],
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
@@ -52,6 +47,13 @@
           }
         ],
       }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "$string:apply_for_network"
+      }
     ]
+
   }
 }

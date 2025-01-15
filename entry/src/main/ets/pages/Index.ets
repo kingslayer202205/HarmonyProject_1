@@ -1,50 +1,233 @@
+import { webview } from '@kit.ArkWeb';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { router } from '@kit.ArkUI';
+import { news_page } from './newspage'
+import { data_store } from './datastore';
 
+class ArticleClass {
+  id: string = '';
+  imageSrc: ResourceStr = '';
+  title: string = '';
+  brief: string = '';
+  webUrl: string = '';
 
-import {webview} from '@kit.ArkWeb'
-import { Login } from './LoginPage';
-
+  constructor(id: string, imageSrc: ResourceStr, title: string, brief: string, webUrl: string) {
+    this.id = id;
+    this.imageSrc = imageSrc;
+    this.title = title;
+    this.brief = brief;
+    this.webUrl = webUrl;
+  }
+}
+const TAG = '[IndexPage]';
+class routerParams {
+  src:string
+  constructor(str:string) {
+    this.src = str
+  }
+}
 @Entry
 @Component
-struct BottomTab {
-  private tabsController: TabsController = new TabsController();
+struct Index {
+  @State message: string = 'main page';
   @State currentIndex: number = 0;
-  controller: webview.WebviewController = new webview.WebviewController()
-  onBackPress(){
-    if(this.controller.accessStep(-1)) {
-      this.controller.backward()
-      return true;
-    }
-
-   return false;
-  }
-
-  @Builder TabBuilder(title: string, targetIndex: number) {
+  private tabsController : TabsController = new TabsController();
+  @Builder
+  tabBarBuilder(title: string, targetIndex: number, selectedIcon: Resource, unselectIcon: Resource) {
     Column() {
+      Image(this.currentIndex === targetIndex ? selectedIcon : unselectIcon)
+        .width(24)
+        .height(24)
       Text(title)
-        .fontColor(this.currentIndex === targetIndex ? '#1698CE' : '#6B6B6B')
+        .fontFamily('HarmonyHeiTi-Medium')
+        .fontSize(10)
+        .fontColor(this.currentIndex === targetIndex ? '#0A59F7' : 'rgba(0,0,0,0.60)')
+        .textAlign(TextAlign.Center)
+        .lineHeight(14)
+        .fontWeight(500)
     }
+    .width('100%')
+    .height('100%')
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
     .onClick(() => {
       this.currentIndex = targetIndex;
-      this.tabsController.changeIndex(this.currentIndex);
+      this.tabsController.changeIndex(targetIndex);
     })
   }
 
   build() {
-    Tabs({
-      barPosition: BarPosition.End,
-      controller: this.tabsController
-    }) {
+    Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
-        Web({ src: 'https://world.huanqiu.com/', controller: this.controller })
-      }.tabBar(this.TabBuilder('新闻', 0))
-      TabContent() {
-        Login()
-      }.tabBar(this.TabBuilder('设置', 1))
-    }
+        Column(){
+          Text(this.message)
+            .fontSize(24)
+            .fontWeight(700)
+            .width('100%')
+            .textAlign(TextAlign.Center)
+            .padding({ left: 16 })
+            .fontFamily('HarmonyHeiTi-Bold')
+            .lineHeight(33)
+          Scroll() {
+            Column() {
+              Button('jump to webview')
+                .fontSize(16)
+                .width(296)
+                .height(40)
+                .backgroundColor($r('sys.color.brand'))
+                .onClick(() => {
+                  this.currentIndex = 1;
+                  this.tabsController.changeIndex(1);
+                })
+              TutorialView()
+            }
+          }
+          .layoutWeight(1)
+          .scrollBar(BarState.Off)
+          .align(Alignment.TopStart)
+        }
+        .width('100%')
+        .height('100%')
+        .backgroundColor('#F1F3F5')
+      }
+      .tabBar(this.tabBarBuilder('首页面', 0, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
 
-    .onChange((index) => {
-      this.currentIndex = index;
+      TabContent() {
+        news_page();
+      }
+      .tabBar(this.tabBarBuilder('新闻网页', 1, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
+
+      TabContent() {
+        data_store();
+      }
+      .tabBar(this.tabBarBuilder('数据存储', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
+    }
+    .scrollable(false)
+    .vertical(false)
+    .divider({
+      strokeWidth: 0.5,
+      color: '#0D182431'
     })
+    .backgroundColor('#F1F3F5')
+    .padding({ top: 36, bottom: 28 })
   }
 }
 
+@Component
+struct TutorialItem {
+  @Prop tutorialItem: ArticleClass;
+  controller: webview.WebviewController = new webview.WebviewController();
+  build() {
+    Row() {
+      Column() {
+        Text(this.tutorialItem.title)
+          .height(19)
+          .width('100%')
+          .fontSize(14)
+          .textAlign(TextAlign.Start)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .maxLines(1)
+          .fontWeight(400)
+          .margin({ top: 4 })
+        Text(this.tutorialItem.brief)
+          .height(32)
+          .width('100%')
+          .fontSize(12)
+          .textAlign(TextAlign.Start)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .maxLines(2)
+          .fontWeight(400)
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .margin({ top: 5 })
+      }
+      .height('100%')
+      .layoutWeight(1)
+      .alignItems(HorizontalAlign.Start)
+      .margin({ right: 12 })
+
+      Image(this.tutorialItem.imageSrc)
+        .height(64)
+        .width(108)
+        .objectFit(ImageFit.Cover)
+        .borderRadius(16)
+    }
+    .width('100%')
+    .height(88)
+    .borderRadius(16)
+    .backgroundColor(Color.White)
+    .padding(12)
+    .alignItems(VerticalAlign.Top)
+  }
+}
+
+@Component
+struct TutorialView {
+  @State tutorialList: Array<ArticleClass> = [
+    new ArticleClass('1', $r('app.media.ic_01_off'), 'list 1',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('2', $r('app.media.ic_01_off'), 'list 2',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('3', $r('app.media.ic_01_off'), 'list 3',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('4', $r('app.media.ic_01_off'), 'list 4',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('5', $r('app.media.ic_01_off'), 'list 5',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('6', $r('app.media.ic_01_off'), 'list 6',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('7', $r('app.media.ic_01_off'), 'list 7',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('7', $r('app.media.ic_01_off'), 'list 8',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('9', $r('app.media.ic_01_off'), 'list 9',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('10', $r('app.media.ic_01_off'), 'list 10',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('11', $r('app.media.ic_01_off'), 'list 11',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+    new ArticleClass('12', $r('app.media.ic_01_off'), 'list 12',
+      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序。',
+      'https://developer.huawei.com/consumer/cn/forum/home?all=1'),
+  ];
+
+  build() {
+    Column() {
+      Text('入门教程')
+        .fontColor('#182431')
+        .fontSize(16)
+        .fontWeight(500)
+        .fontFamily('HarmonyHeiTi-medium')
+        .textAlign(TextAlign.Start)
+        .padding({ left: 16 })
+        .margin({ bottom: 8.5 })
+      List({ space: 12 }) {
+        ForEach(this.tutorialList, (item: ArticleClass) => {
+          ListItem() {
+            TutorialItem({ tutorialItem: item })
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/webPage',
+                  params: new routerParams('webPage Page')
+                })
+              })
+          }
+        }, (item: ArticleClass) => item.id)
+      }
+      .scrollBar(BarState.Off)
+      .padding({ left: 16, right: 16 })
+    }
+    .margin({ top: 18 })
+    .alignItems(HorizontalAlign.Start)
+  }
+}
