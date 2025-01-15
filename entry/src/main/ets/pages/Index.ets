@@ -2,7 +2,7 @@ import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { router } from '@kit.ArkUI';
 import { news_page } from './newspage'
-import { data_store } from './datastore';
+import { Login } from './login';
 
 class ArticleClass {
   id: string = '';
@@ -29,7 +29,6 @@ class routerParams {
 @Entry
 @Component
 struct Index {
-  @State message: string = 'main page';
   @State currentIndex: number = 0;
   private tabsController : TabsController = new TabsController();
   @Builder
@@ -60,25 +59,8 @@ struct Index {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
         Column(){
-          Text(this.message)
-            .fontSize(24)
-            .fontWeight(700)
-            .width('100%')
-            .textAlign(TextAlign.Center)
-            .padding({ left: 16 })
-            .fontFamily('HarmonyHeiTi-Bold')
-            .lineHeight(33)
           Scroll() {
             Column() {
-              Button('jump to webview')
-                .fontSize(16)
-                .width(296)
-                .height(40)
-                .backgroundColor($r('sys.color.brand'))
-                .onClick(() => {
-                  this.currentIndex = 1;
-                  this.tabsController.changeIndex(1);
-                })
               TutorialView()
             }
           }
@@ -90,17 +72,17 @@ struct Index {
         .height('100%')
         .backgroundColor('#F1F3F5')
       }
-      .tabBar(this.tabBarBuilder('首页面', 0, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
+      .tabBar(this.tabBarBuilder('首页', 0, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
 
       TabContent() {
         news_page();
       }
-      .tabBar(this.tabBarBuilder('新闻网页', 1, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
+      .tabBar(this.tabBarBuilder('新闻', 1, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
 
       TabContent() {
-        data_store();
+        Login();
       }
-      .tabBar(this.tabBarBuilder('数据存储', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
+      .tabBar(this.tabBarBuilder('用户', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
     }
     .scrollable(false)
     .vertical(false)
@@ -205,7 +187,7 @@ struct TutorialView {
     Column() {
       Text('入门教程')
         .fontColor('#182431')
-        .fontSize(16)
+        .fontSize(32)
         .fontWeight(500)
         .fontFamily('HarmonyHeiTi-medium')
         .textAlign(TextAlign.Start)

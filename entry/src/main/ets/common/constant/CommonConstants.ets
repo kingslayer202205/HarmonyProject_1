@@ -40,12 +40,12 @@ class CommonConstants {
   /**
    * The key value of the data store.
    */
-  KEY_NAME = 'fruit';
+  KEY_NAME = 'account';
 
   /**
    * The name of the data store.
    */
-  PREFERENCES_NAME = 'fruit.db';
+  PREFERENCES_NAME = 'account.db';
 }
 
 export default new CommonConstants();
