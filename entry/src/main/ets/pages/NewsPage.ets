@@ -1,17 +1,3 @@
-/*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License,Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 import Constants from '../common/constant/Constants';
 import NewsList from '../view/NewsList';
@@ -20,9 +6,6 @@ import NewsTypeViewModel from '../viewmodel/NewsTypeViewModel';
 import NewsTypeBean from '../viewmodel/NewsTypeModel';
 import { GlobalContext } from '../viewmodel/GlobalContext';
 
-/**
- * MainPage
- */
 @Component
 export struct news_page {
   @State tabBarArray: NewsTypeBean[] = NewsTypeViewModel.getDefaultTypeList();
@@ -44,7 +27,7 @@ export struct news_page {
   }
 
   aboutToAppear() {
-    // Request news category.
+
     NewsTypeViewModel.getNewsTypeList().then((typeList: NewsTypeBean[]) => {
       this.tabBarArray = typeList;
     });
