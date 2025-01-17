@@ -4,7 +4,7 @@ export default class Constants {
   /**
    * The host address of the server.
    */
-  static readonly SERVER: string = 'http://10.52.27.81:9588';
+  static readonly SERVER: string = 'http://192.168.1.4:9588';
 
   /**
    * Get the news type.

@@ -3,6 +3,8 @@ import { router } from '@kit.ArkUI';
 import { news_page } from './newspage'
 import { Login } from './login'
 import { taskpool } from '@kit.ArkTS'
+import { routerParams } from '../common/constant/router'
+
 
 class ArticleClass {
   id: string = '';
@@ -19,11 +21,24 @@ class ArticleClass {
     this.webUrl = webUrl;
   }
 }
-const TAG = '[IndexPage]';
-class routerParams {
-  src:string
-  constructor(str:string) {
-    this.src = str
+
+
+@Concurrent
+function WebLoad(url:string): void {
+    router.pushUrl({
+      url:'pages/webPage',
+      params: new routerParams(url)
+    })
+}
+
+async function ConWebLoad(url:string){
+  try{
+    let task:taskpool.Task = new taskpool.Task(WebLoad,url);
+    let result = await taskpool.execute(task);
+
+  }
+  catch (e){
+    console.error("Error Happened in taskpool: " + e);
   }
 }
 
@@ -106,7 +121,7 @@ struct TutorialItem {
         Text(this.tutorialItem.title)
           .height(19)
           .width('100%')
-          .fontSize(14)
+          .fontSize(18)
           .textAlign(TextAlign.Start)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
           .maxLines(1)
@@ -147,42 +162,42 @@ struct TutorialItem {
 @Component
 struct TutorialView {
   @State tutorialList: Array<ArticleClass> = [
-    new ArticleClass('1', $r('app.media.tutorial_pic1'), 'Step1 开发入门:Hello World',
-      '本篇教程实现了快速入门——一个用于了解和学习HarmonyOS的应用程序 。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-HelloWorld'),
-    new ArticleClass('2', $r('app.media.tutorial_pic2'), 'Step2 使用Swiper构建运营位',
-      'Swiper组件提供滑动轮播显示的能力。Swiper本身是一个容器组件，当设置了多个子组件后，可以对这些子组件进行轮播显示。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-SwiperBanner'),
-    new ArticleClass('3', $r('app.media.tutorial_pic3'), 'Step3 创建Item视图',
-      'Item定义子组件相关特征。相关组件支持使用条件渲染、循环渲染、懒加载等方式生成子组件。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-BuildItem'),
-    new ArticleClass('4', $r('app.media.tutorial_pic4'), 'Step4 网格和列表组件的使用',
-      '网格和列表组件中，当Item达到一定数量，内容超过屏幕大小时，可以自动提供滚动功能，适合用于呈现同类数据类型或数据类型集',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-GridAndList'),
-    new ArticleClass('5', $r('app.media.tutorial_pic5'), 'Step5 应用架构设计基础——MVVM框架',
-      'ArkUI采取MVVM = Model + View + ViewModel模式，将数据与视图绑定在一起，数据更新时候会直接更新视图。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-BasicArchitectureDesignPart1'),
-    new ArticleClass('6', $r('app.media.tutorial_pic6'), 'Step6 应用架构设计基础——三层架构',
-      'ArkWeb（方舟Web）提供了Web组件，用于在应用程序中显示Web页面内容，为开发者提供页面加载、页面交互、页面调试等能力。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-BasicArchitectureDesignPart2'),
-    new ArticleClass('7', $r('app.media.tutorial_pic7'), 'Step7 ArkWeb页面适配',
-      '基于Web组件实现了快速入门案例中的课程学习界面，帮助开发者了解如何加载网络界面、本地界面以及如何进行网络权限的配置。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-ArkwebPageAdaptation'),
-    new ArticleClass('8', $r('app.media.tutorial_pic8'), 'Step8 通过结构数据构建页面',
-      '在该教程中会根据对知识地图界面进行界面实现的分析以及相应的数据结构的设计，然后逐步实现知识地图中的两个界面。通过该章节，开发者可以了解到数据如何驱动UI更新。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-DataDrivenUIUpdates'),
-    new ArticleClass('9', $r('app.media.tutorial_pic9'), 'Step9 设置组件导航',
-      '该教程会在“数据驱动UI更新”教程完成了知识地图相关界面开发的基础上，对代码进行修改，实现从知识地图页到知识地图详情页的组件路由导航，同时该教程中会讲解到Tabs的开发。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-SettingUpComponentNavigation'),
-    new ArticleClass('10', $r('app.media.tutorial_pic10'), 'Step10 原生智能：AI语音朗读',
-      '为您的文章详情页添加文本转语音服务，朗读文章简介，手机在无网状态下系统应用无障碍（屏幕朗读）接入文本转语音能力，提供语音播报。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-TTS'),
-    new ArticleClass('11', $r('app.media.tutorial_pic11'), 'Step11 一次开发，多端部署',
-      '通过对快速入门整体页面的分析，得出关键的界面适配点以及需要适配的关键组件，然后通过对关键适配点的逐步适配，完成整个应用的一多开发。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-DevelopOnceDeployAnywhere'),
-    new ArticleClass('12', $r('app.media.tutorial_pic12'), 'Step12 原生互联：分布式流转',
-      '基于分布式流转相关能力，使得整个应用可以在不同设备间进行无缝的流转。该章节内容会涉及到流转的相关前提，如何进行流转的权限配置以及实现应用可流转。',
-      'https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_Next-DistributedFlow')
+    new ArticleClass('1', $r('app.media.tutorial_pic1'), '应用开发导读',
+      '应用开发文档用于指导开发者通过HarmonyOS SDK提供的开放能力完成应用开发。在使用应用开发文档前，推荐您通过知识地图了解应用开发完整旅程。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/application-dev-guide-V5'),
+    new ArticleClass('2', $r('app.media.tutorial_pic2'), '快速入门',
+      '本文档适用于HarmonyOS应用开发的初学者。通过构建一个简单的具有页面跳转/返回功能的应用，快速了解工程目录的主要文件，熟悉HarmonyOS应用开发流程。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/quick-start-V5'),
+    new ArticleClass('3', $r('app.media.tutorial_pic3'), '开发基础知识',
+      '在基于Stage模型开发应用之前，开发者需要了解应用的设计机制、应用程序包结构等基础知识。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/development-fundamentals-V5'),
+    new ArticleClass('4', $r('app.media.tutorial_pic4'), '资源分类与访问',
+      '应用开发过程中，经常需要用到颜色、字体、间距、图标等资源，在不同的设备或配置中，这些资源的值可能不同。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/resource-categories-and-access-V5'),
+    new ArticleClass('5', $r('app.media.tutorial_pic5'), '学习ArkTS语言',
+      'ArkTS是HarmonyOS优选的主力应用开发语言。ArkTS围绕应用开发在TypeScript（简称TS）生态基础上做了进一步扩展，保持了TS的基本风格，同时通过规范定义强化开发期静态检查和分析，提升程序执行稳定性和性能。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/learning-arkts-V5'),
+    new ArticleClass('6', $r('app.media.tutorial_pic6'), '术语',
+      '鸿蒙软件开发的必备术语',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/glossary-V5'),
+    new ArticleClass('7', $r('app.media.tutorial_pic7'), '应用开发准备',
+      '在开始应用开发前，需要先完成以下准备工作。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/application-dev-overview-V5'),
+    new ArticleClass('8', $r('app.media.tutorial_pic8'), 'Ability Kit（程序框架服务）',
+      'Ability Kit（程序框架服务）提供了应用程序开发和运行的应用模型，是系统为开发者提供的应用程序所需能力的抽象提炼，它提供了应用程序必备的组件和运行机制。有了应用模型，开发者可以基于一套统一的模型进行应用开发，使应用开发更简单、高效。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ability-kit-V5'),
+    new ArticleClass('9', $r('app.media.tutorial_pic9'), 'ArkTS（方舟编程语言）',
+      'ArkTS是HarmonyOS应用开发的官方高级语言。ArkTS提供了声明式UI范式、状态管理、渲染控制等相应的能力，让开发者能够以更简洁、更自然的方式开发应用。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/arkts-V5'),
+    new ArticleClass('10', $r('app.media.tutorial_pic10'), 'ArkUI（方舟UI框架）',
+      'ArkUI（方舟UI框架）为应用的UI开发提供了完整的基础设施，包括简洁的UI语法、丰富的UI功能（组件、布局、动画以及交互事件），以及实时界面预览工具等，可以支持开发者进行可视化界面开发。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/arkui-V5'),
+    new ArticleClass('11', $r('app.media.tutorial_pic11'), 'ArkWeb（方舟Web）',
+      'ArkWeb（方舟Web）提供了Web组件，用于在应用程序中显示Web页面内容。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/arkweb-V5'),
+    new ArticleClass('12', $r('app.media.tutorial_pic12'), 'Core File Kit（文件基础服务）',
+      'Core File Kit（文件基础服务）为开发者提供一套访问和管理应用文件和用户文件的能力。帮助用户更高效地管理、查找和备份各类文件，使用户能够轻松应对各种文件管理的需求。',
+      'https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/core-file-kit-V5')
   ];
 
   build() {
@@ -200,10 +215,7 @@ struct TutorialView {
           ListItem() {
             TutorialItem({ tutorialItem: item })
               .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/webPage',
-                  params: new routerParams(item.webUrl)
-                })
+                WebLoad(item.webUrl);
               })
           }
         }, (item: ArticleClass) => item.id)
