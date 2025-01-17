@@ -12,7 +12,7 @@ struct WebComponent {
   @State src: string = this.params.src;
   build() {
     Column() {
-      // 组件创建时，加载www.example.com
+
       Web({ src: this.src, controller: this.controller})
     }
   }

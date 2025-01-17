@@ -1,6 +1,14 @@
 import PreferenceModel, { Account } from '../model/PreferenceModel';
 import promptAction from '@ohos.promptAction';
+import { taskpool } from '@kit.ArkTS'
 
+
+@Concurrent
+function Logout(isLogin:boolean):void {
+  PreferenceModel.deletePreferences();
+
+
+}
 @Component
 export struct Login {
   @State account: Account = new Account();
