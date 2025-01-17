@@ -12,7 +12,7 @@ struct WebComponent {
   @State src: string = this.params.src;
   build() {
     Column() {
-      Text(this.src)
+      Text('webpage')
         .fontSize(20)
         .opacity(0.6)
       Button('back')
@@ -30,7 +30,7 @@ struct WebComponent {
           }
         })
       // 组件创建时，加载www.example.com
-      Web({ src: 'https://developer.huawei.com/consumer/cn/forum/home?all=1', controller: this.controller})
+      Web({ src: this.src, controller: this.controller})
     }
   }
 }
