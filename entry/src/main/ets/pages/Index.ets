@@ -1,6 +1,6 @@
 import { webview } from '@kit.ArkWeb';
 import { router } from '@kit.ArkUI';
-import { news_page } from './newspage'
+import { news_page } from './NewsPage'
 import { Login } from './login'
 import { taskpool } from '@kit.ArkTS'
 import { routerParams } from '../common/constant/router'
