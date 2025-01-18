@@ -4,11 +4,14 @@ import { taskpool } from '@kit.ArkTS'
 
 
 @Concurrent
-function Logout(isLogin:boolean):void {
-  PreferenceModel.deletePreferences();
+function showToast():void {
 
-
+  promptAction.showToast({
+    message: '请输入账号密码！',
+    duration: 2000,
+  });
 }
+
 @Component
 export struct Login {
   @State account: Account = new Account();
@@ -45,8 +48,16 @@ export struct Login {
           .margin({ bottom: 20 })
           .onClick(() => {
             //点击退出登录，在本地删除账号信息，更新登录状态
-            PreferenceModel.deletePreferences();
-            this.isLogin = false;
+            try {
+              PreferenceModel.deletePreferences();
+              this.isLogin = false;
+              this.account.account = '';
+              this.account.password = '';
+            }
+            catch (e){
+              console.error("logout error :" + e);
+            }
+
           })
 
       }
@@ -82,11 +93,14 @@ export struct Login {
               PreferenceModel.writeData(this.account);
 
             } else {
-              promptAction.showToast({
-                message: '请输入账号密码！',
-                duration: 2000,
-              });
-
+              try {
+                let task:taskpool.Task = new taskpool.Task(showToast);
+                let result = taskpool.execute(task);
+                console.log("taskpool result is" + result);
+              }
+              catch (e){
+                console.error("Error Happened in taskpool:"+e);
+              }
             }
           }
           )
@@ -101,10 +115,11 @@ export struct Login {
     }
     .height('100%')
     .width('100%')
-    .justifyContent(FlexAlign.Center)
+    .justifyContent(FlexAlign.SpaceEvenly)
     .alignItems(HorizontalAlign.Center)
     .padding(20)
     .backgroundColor('#F1F3F5')
+    .transition(TransitionEffect.SLIDE.animation({curve: Curve.Ease}))
 
   }
 

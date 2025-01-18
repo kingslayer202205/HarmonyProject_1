@@ -35,7 +35,7 @@ async function ConWebLoad(url:string){
   try{
     let task:taskpool.Task = new taskpool.Task(WebLoad,url);
     let result = await taskpool.execute(task);
-
+    console.log("taskpool result is "+ result);
   }
   catch (e){
     console.error("Error Happened in taskpool: " + e);
@@ -66,8 +66,14 @@ struct Index {
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
     .onClick(() => {
-      this.currentIndex = targetIndex;
-      this.tabsController.changeIndex(targetIndex);
+      try {
+        this.currentIndex = targetIndex;
+        this.tabsController.changeIndex(targetIndex);
+      }
+      catch (e){
+        console.error("change index error :" + e);
+      }
+
     })
   }
 
@@ -100,7 +106,8 @@ struct Index {
       }
       .tabBar(this.tabBarBuilder('用户', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
     }
-    .scrollable(false)
+
+    .scrollable(true)
     .vertical(false)
     .divider({
       strokeWidth: 0.5,
@@ -142,6 +149,7 @@ struct TutorialItem {
       .layoutWeight(1)
       .alignItems(HorizontalAlign.Start)
       .margin({ right: 12 })
+
 
       Image(this.tutorialItem.imageSrc)
         .height(64)
@@ -215,15 +223,26 @@ struct TutorialView {
           ListItem() {
             TutorialItem({ tutorialItem: item })
               .onClick(() => {
-                WebLoad(item.webUrl);
+                //this.opacity(0.6)
+                try {
+                  WebLoad(item.webUrl);
+                }
+                catch (e){
+                  console.error("WebPage load error:" + e);
+                }
+
               })
+
           }
+
         }, (item: ArticleClass) => item.id)
       }
       .scrollBar(BarState.Off)
       .padding({ left: 16, right: 16 })
+
     }
     .margin({ top: 18 })
     .alignItems(HorizontalAlign.Start)
+    .transition(TransitionEffect.SLIDE.animation({curve: Curve.Ease}))
   }
 }
