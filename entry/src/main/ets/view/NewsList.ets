@@ -99,7 +99,7 @@ export default struct NewsList {
     .backgroundColor($r('app.color.listColor'))
     .edgeEffect(EdgeEffect.None)
     .onScrollIndex((start: number, end: number) => {
-      // Listen to the first index of the current list.
+
       this.refreshStore.startIndex = start;
       this.refreshStore.endIndex = end;
     })

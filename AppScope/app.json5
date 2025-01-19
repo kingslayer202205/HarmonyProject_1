@@ -1,6 +1,6 @@
 {
   "app": {
-    "bundleName": "com.example.lab1",
+    "bundleName": "com.ourapp.1",
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
