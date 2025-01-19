@@ -4,6 +4,8 @@ import { webview } from '@kit.ArkWeb';
 class routerParams {
   src:string = ''
 }
+
+//根据给定url，跳转到web页面
 @Entry
 @Component
 struct WebComponent {
@@ -12,7 +14,6 @@ struct WebComponent {
   @State src: string = this.params.src;
   build() {
     Column() {
-
       Web({ src: this.src, controller: this.controller})
     }
   }

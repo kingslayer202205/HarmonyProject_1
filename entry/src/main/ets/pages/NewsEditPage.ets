@@ -1,10 +1,10 @@
 
 import { router } from '@kit.ArkUI';
 import Constants from '../common/constant/Constants';
-import { fileSelect, fileUpload } from '../common/utils/FileUtil';
+import { fileSelect, fileUpload } from '../common/tools/File';
 import { NewsFile, NewsData } from '../viewmodel/NewsData';
 import NewsViewModel from '../viewmodel/NewsViewModel';
-import { showToast } from '../common/utils/ToastUtil';
+import { showToast } from '../common/tools/Toast';
 import UploadingLayout from '../view/UploadingLayout';
 import ResponseResult from '../viewmodel/ResponseResult';
 import { GlobalContext } from '../viewmodel/GlobalContext';
@@ -24,6 +24,7 @@ struct NewsEditPage {
     });
   }
 
+  //发布新闻的逻辑
   uploadNewsData() {
     if (this.title === '') {
       showToast($r('app.string.prompt_no_title'));
@@ -64,6 +65,7 @@ struct NewsEditPage {
     });
   }
 
+  //构建新闻发布页
   build() {
     Stack() {
       Navigation() {

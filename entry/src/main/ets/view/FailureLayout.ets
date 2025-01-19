@@ -2,6 +2,7 @@
 
 import Constants from '../common/constant/Constants';
 
+//网络加载失败
 @Component
 export default struct FailureLayout {
   reloadAction = () => {};

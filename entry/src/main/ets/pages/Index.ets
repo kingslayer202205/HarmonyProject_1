@@ -1,11 +1,11 @@
 import { webview } from '@kit.ArkWeb';
 import { router } from '@kit.ArkUI';
-import { news_page } from './newspage'
+import { news_page } from './NewsPage'
 import { Login } from './login'
 import { taskpool } from '@kit.ArkTS'
 import { routerParams } from '../common/constant/router'
 
-
+//存储列表项的相关信息
 class ArticleClass {
   id: string = '';
   imageSrc: ResourceStr = '';
@@ -22,7 +22,7 @@ class ArticleClass {
   }
 }
 
-
+//加载web页面
 @Concurrent
 function WebLoad(url:string): void {
     router.pushUrl({
@@ -42,6 +42,7 @@ async function ConWebLoad(url:string){
   }
 }
 
+//构建主页面
 @Entry
 @Component
 struct Index {
@@ -97,12 +98,12 @@ struct Index {
       .tabBar(this.tabBarBuilder('首页', 0, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
 
       TabContent() {
-        news_page();
+        news_page();  //新闻阅览页面
       }
       .tabBar(this.tabBarBuilder('新闻', 1, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
 
       TabContent() {
-        Login();
+        Login();  //登录页面
       }
       .tabBar(this.tabBarBuilder('用户', 2, $r('app.media.ic_01_on'), $r('app.media.ic_01_off')))
     }
@@ -118,6 +119,7 @@ struct Index {
   }
 }
 
+//列表项的结构
 @Component
 struct TutorialItem {
   @Prop tutorialItem: ArticleClass;
@@ -167,6 +169,7 @@ struct TutorialItem {
 }
 
 
+//列表项显示的具体内容
 @Component
 struct TutorialView {
   @State tutorialList: Array<ArticleClass> = [

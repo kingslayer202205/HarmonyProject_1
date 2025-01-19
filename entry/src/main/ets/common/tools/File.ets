@@ -6,7 +6,7 @@ import { picker } from '@kit.CoreFileKit';
 import Constants, { ContentType, RequestMethod, UploadingState } from '../constant/Constants';
 import ResponseResult from '../../viewmodel/ResponseResult';
 import Logger from './Logger';
-import { showToast } from './ToastUtil';
+import { showToast } from './Toast';
 
 
 export async function fileSelect(): Promise<string> {
@@ -32,13 +32,8 @@ export async function fileSelect(): Promise<string> {
   }
 }
 
-/**
- * Upload file.
- *
- * @param context Indicates the application BaseContext.
- * @param fileUri The local storage path of the file.
- * @returns the promise returned by the function.
- */
+//Upload file.
+
 export function fileUpload(context: Context, fileUri: string): Promise<ResponseResult> {
   // Obtaining the Application File Path.
   let cacheDir = context.cacheDir;

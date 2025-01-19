@@ -5,7 +5,19 @@ import { router } from '@kit.ArkUI';
 import NewsTypeViewModel from '../viewmodel/NewsTypeViewModel';
 import NewsTypeBean from '../viewmodel/NewsTypeModel';
 import { GlobalContext } from '../viewmodel/GlobalContext';
+import  { taskpool } from  '@kit.ArkTS'
 
+
+@Concurrent
+function ConPushUrl(Weburl:string):void {
+  try{
+    router.pushUrl({ url:Weburl});
+  }
+  catch (e){
+    console.error("WebPage load failed:" + e);
+  }
+
+}
 @Component
 export struct news_page {
   @State tabBarArray: NewsTypeBean[] = NewsTypeViewModel.getDefaultTypeList();
@@ -65,7 +77,8 @@ export struct news_page {
         .height($r('app.float.btn_size'))
         .margin({ bottom: $r('app.float.btn_margin'), right: $r('app.float.btn_margin') })
         .onClick(() => {
-          router.pushUrl({ url: Constants.NEWS_EDIT_PAGE });
+          ConPushUrl(Constants.NEWS_EDIT_PAGE);
+          let task: taskpool.Task = new taskpool.Task(ConPushUrl,Constants.NEWS_EDIT_PAGE);
         })
     }
     .width(Constants.FULL_PERCENT)

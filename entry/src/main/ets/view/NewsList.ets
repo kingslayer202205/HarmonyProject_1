@@ -5,15 +5,14 @@ import RefreshLayout from './RefreshLayout';
 import { NewsData } from '../viewmodel/NewsData';
 import Constants, { PageState } from '../common/constant/Constants';
 import NewsViewModel from '../viewmodel/NewsViewModel';
-import { showToast } from '../common/utils/ToastUtil';
+import { showToast } from '../common/tools/Toast';
 import FailureLayout from './FailureLayout';
 import LoadingLayout from './LoadingLayout';
 import NoMoreLayout from './NoMoreLayout';
 import RefreshListViewModel from '../viewmodel/RefreshListViewModel';
 
-/**
- * The news list component.
- */
+
+//新闻列表
 @Component
 export default struct NewsList {
   index: number = 0;

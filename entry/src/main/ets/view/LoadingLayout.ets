@@ -2,6 +2,7 @@
 
 import Constants from '../common/constant/Constants';
 
+//加载中
 @Component
 export default struct LoadingLayout {
   build() {

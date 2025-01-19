@@ -3,9 +3,7 @@
 import RefreshLoadingClass from '../viewmodel/RefreshLoadingClass';
 import Constants from '../common/constant/Constants';
 
-/**
- * The load more layout component.
- */
+//加载更多
 @Component
 export default struct LoadMoreLayout {
   @ObjectLink loadMoreLayoutClass: RefreshLoadingClass;

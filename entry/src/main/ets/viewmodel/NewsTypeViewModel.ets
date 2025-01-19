@@ -2,7 +2,7 @@
 import NewsTypeBean from './NewsTypeModel'
 import ResponseResult from './ResponseResult';
 import Constants from '../common/constant/Constants';
-import { httpRequestGet } from '../common/utils/HttpUtil';
+import { httpRequestGet } from '../common/tools/Http';
 
 const DEFAULT_NEWS_TYPES: NewsTypeBean[] = [
   new NewsTypeBean(0, $r('app.string.tab_all')),
@@ -15,11 +15,7 @@ const DEFAULT_NEWS_TYPES: NewsTypeBean[] = [
 ];
 
 class NewsTypeViewModel {
-  /**
-   * Get news type list from server.
-   *
-   * @return NewsTypeBean[] newsTypeList
-   */
+
   getNewsTypeList(): Promise<NewsTypeBean[]> {
     return new Promise((resolve: Function) => {
       let url = `${Constants.SERVER}/${Constants.GET_NEWS_TYPE}`;
@@ -35,11 +31,7 @@ class NewsTypeViewModel {
     });
   }
 
-  /**
-   * Get default news type list.
-   *
-   * @return NewsTypeBean[] newsTypeList
-   */
+
   getDefaultTypeList(): NewsTypeBean[] {
     return DEFAULT_NEWS_TYPES;
   }

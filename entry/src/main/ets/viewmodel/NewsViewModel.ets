@@ -3,15 +3,11 @@
 import { NewsData } from './NewsData';
 import ResponseResult from './ResponseResult';
 import Constants from '../common/constant/Constants';
-import { httpRequestGet, httpRequestPost } from '../common/utils/HttpUtil';
-import Logger from '../common/utils/Logger';
+import { httpRequestGet, httpRequestPost } from '../common/tools/Http';
+import Logger from '../common/tools/Logger';
 
 class NewsViewModel {
-  /**
-   * Get news type list from server.
-   *
-   * @return NewsData[] newsDataList
-   */
+  //从服务器获取新闻列表
   getNewsList(currentPage: number, pageSize: number): Promise<NewsData[]> {
     return new Promise(async (resolve: Function, reject: Function) => {
       let url = `${Constants.SERVER}/${Constants.GET_NEWS_LIST}`;
@@ -30,12 +26,7 @@ class NewsViewModel {
     });
   }
 
-  /**
-   * Upload news data.
-   *
-   * @param newsData
-   * @returns NewsData[] newsDataList
-   */
+  //上传新闻数据
   uploadNews(newsData: NewsData): Promise<NewsData[]> {
     return new Promise((resolve: Function, reject: Function) => {
       let url = `${Constants.SERVER}/${Constants.UPLOAD_NEWS}`;

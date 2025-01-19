@@ -2,6 +2,8 @@
 
 import Constants from '../common/constant/Constants';
 
+
+//上传中
 @Component
 export default struct UploadingLayout {
 

@@ -1,8 +1,6 @@
 
 
-/**
- * The No more data layout component.
- */
+//没有更多数据
 import Constants from '../common/constant/Constants';
 
 @Component

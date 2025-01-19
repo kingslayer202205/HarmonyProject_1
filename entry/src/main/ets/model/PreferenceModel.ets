@@ -1,6 +1,6 @@
 import { promptAction } from '@kit.ArkUI';
 import { preferences } from '@kit.ArkData';
-import Logger from '../common/utils/Logger';
+import Logger from '../common/tools/Logger';
 import CommonConstants from '../common/constant/CommonConstants';
 
 
@@ -25,7 +25,7 @@ class PreferenceModel {
     }
   }
 
-
+//从本地数据库删除数据
   async deletePreferences() {
     try {
       await preferences.deletePreferences(context, CommonConstants.PREFERENCES_NAME);
@@ -36,7 +36,7 @@ class PreferenceModel {
     this.showToastMessage($r('app.string.delete_success_msg'));
   }
 
-
+//存储数据到本地数据库
   async putPreference(account:Account) {
     if (!preference) {
       await this.getPreferencesFromStorage();
@@ -46,7 +46,7 @@ class PreferenceModel {
     } catch (err) {
       Logger.error(CommonConstants.TAG, `Failed to put value, Cause: ${err}`);
     }
-    // Store the Preference instance in the preference persistence file
+
     await preference.flush();
   }
 
@@ -60,7 +60,7 @@ class PreferenceModel {
     } catch (err) {
       Logger.error(CommonConstants.TAG, `Failed to get value, Cause: ${err}`);
     }
-    // If the data is empty, a message is displayed indicating that data needs to be written.
+
     if (account === '') {
       this.showToastMessage($r('app.string.data_is_null_msg'));
       return;
@@ -69,9 +69,7 @@ class PreferenceModel {
     return JSON.parse(account);
   }
 
-  /**
-   * Process the data obtained from the database.
-   */
+
   async getAccountData() {
     this.accountData = await this.getPreference();
     return this.accountData;

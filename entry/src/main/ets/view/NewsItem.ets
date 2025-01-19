@@ -2,9 +2,7 @@
 import { NewsData, NewsFile } from '../viewmodel/NewsData';
 import Constants from '../common/constant/Constants';
 
-/**
- * The news list item component.
- */
+//新闻项目
 @Component
 export default struct NewsItem {
   newsData: NewsData = new NewsData();

@@ -39,10 +39,10 @@ export default class RefreshListViewModel {
         }
         let isDownPull = event.touches[0].y - this.lastMoveY > 0;
         if ((isDownPull || this.isPullRefreshOperation) && !this.isCanLoadMore) {
-          // Touch move pull refresh.
+
           this.touchMovePullRefresh(event);
         } else {
-          // Touch move load more.
+
           this.touchMoveLoadMore(event);
         }
         this.lastMoveY = event.touches[0].y;
@@ -54,10 +54,10 @@ export default class RefreshListViewModel {
           return;
         }
         if (this.isPullRefreshOperation) {
-          // Touch up pull refresh.
+
           this.touchUpPullRefresh();
         } else {
-          // Touch up load more.
+
           this.touchUpLoadMore();
         }
         break;
@@ -71,7 +71,7 @@ export default class RefreshListViewModel {
       this.isPullRefreshOperation = true;
       let height = vp2px(Constants.CUSTOM_LAYOUT_HEIGHT);
       this.offsetY = event.touches[0].y - this.downY;
-      // Check offsetY to Refresh.
+
       if (this.offsetY >= height) {
         this.pullRefreshState(RefreshState.Release);
         this.offsetY = height + this.offsetY * Constants.Y_OFF_SET_COEFFICIENT;

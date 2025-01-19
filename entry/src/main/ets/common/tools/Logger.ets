@@ -10,13 +10,6 @@ class Logger {
   // format Indicates the log format string.
   private format: string = '%{public}s, %{public}s';
 
-  /**
-   * constructor.
-   *
-   * @param prefix Identifies the log tag.
-   * @param domain Indicates the service domain, which is a hexadecimal integer ranging from 0x0 to 0xFFFFF
-   * @param args Indicates the log parameters.
-   */
   constructor(prefix: string = '', domain: number = 0xFF00) {
     this.prefix = prefix;
     this.domain = domain;

@@ -2,9 +2,7 @@
 import RefreshLoadingClass from '../viewmodel/RefreshLoadingClass';
 import Constants from '../common/constant/Constants';
 
-/**
- * The refresh layout component.
- */
+//刷新
 @Component
 export default struct RefreshLayout {
   @ObjectLink refreshLoadingClass: RefreshLoadingClass;
